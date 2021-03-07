@@ -1,0 +1,24 @@
+version: "3.1"
+
+services:
+  db:
+    container_name: servidor_mysql
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: bookmedik
+      MYSQL_USER: bookmedik
+      MYSQL_PASSWORD: bookmedik
+      MYSQL_ROOT_PASSWORD: pruebadocker
+    volumes:
+      - /opt/mysql_wp:/var/lib/mysql
+
+  bookmedik:
+    container_name: bookmedik
+    image: juanlu/bookmedik:v1
+    restart: always
+    ports:
+      - 8082:80
+    volumes:
+      - /opt/bookmedik:/var/log/apache2
+
